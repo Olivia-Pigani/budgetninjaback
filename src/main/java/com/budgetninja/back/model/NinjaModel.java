@@ -8,6 +8,7 @@ import lombok.Setter;
 import java.util.List;
 
 @Entity
+@Table(name="ninjas")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -23,7 +24,7 @@ public class NinjaModel {
     private String username;
 
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "users", cascade = CascadeType.ALL)
     private List <AlertModel> alertModels;
 
 
