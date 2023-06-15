@@ -14,15 +14,16 @@ public class CategoryService {
        this.categoryRepository = categoryRepository;
     }
 
-    public List<CategoryModel> findAll() {
+    public List<CategoryModel> getAllCategories() {
         return categoryRepository.findAll();
     }
-    public CategoryModel findById(Long id){
+    public CategoryModel findCategoryById(Long id){
         return categoryRepository.findById(id).orElseThrow(
                 ()->new ResponseStatusException(HttpStatus.NOT_FOUND,"categories not found")
         );
     }
-    public CategoryModel update(CategoryModel categoryModel, long id){
+
+    public CategoryModel updateCategory(CategoryModel categoryModel, long id){
         CategoryModel existingCategory= categoryRepository.findById(id).orElse(null);
         if( existingCategory ==null){
             throw new RuntimeException("Category not found");
@@ -33,7 +34,7 @@ public class CategoryService {
         }
 
     }
-    public void deleteById(Long id){
+    public void deleteCategoryById(Long id){
         categoryRepository.deleteById(id);
     }
     public CategoryModel save(CategoryModel categoryModel){

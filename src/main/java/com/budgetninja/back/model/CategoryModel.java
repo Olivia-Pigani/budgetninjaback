@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -16,5 +18,6 @@ public class CategoryModel {
         private Long id;
         @Column(name = "categorieName")
         private String categorieName;
+
 
 }

@@ -22,19 +22,16 @@ public class UserController {
     }
     @GetMapping("")
     public List<UserModel> getAllUsers(){
-        return userService.findAll();
+        return userService.findAllUsers();
     }
     @PostMapping("")
     public UserModel createUser(@RequestBody UserModel userModel){
         return userService.save(userModel);
 }
-    @GetMapping("/{id}")
-    public UserModel getUserById(Long id){
-        return userService.findById(id);
+    @GetMapping("/{user_id}")
+    public UserModel getUserById(@PathVariable Long user_id){
+        return userService.findUserByUserId(user_id);
     }
 
-//    @GetMapping("")
-//    public RoleModel addRole(@RequestBody RoleModel roleModel){
-//        return userService.addRole(new RoleModel(null, "ADMIN"));
-//    }
+
 }
