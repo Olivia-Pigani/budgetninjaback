@@ -20,6 +20,4 @@ public class SavingModel {
     @OneToOne
     @JoinColumn(name = "budget_id")
     private BudgetModel budget;
-
-
 }
