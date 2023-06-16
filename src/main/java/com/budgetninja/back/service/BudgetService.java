@@ -13,34 +13,31 @@ public class BudgetService {
 
 
 private final BudgetRepository budgetRepository;
-
     public BudgetService(BudgetRepository budgetRepository) {
         this.budgetRepository = budgetRepository;
     }
-
-
     public List<BudgetModel> findAll(){
         return budgetRepository.findAll();
     }
-
-
     public BudgetModel findById(Long id){
         return budgetRepository.findById(id).orElseThrow(
                 () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "BUDGET not found")
         );
     }
 
+    public BudgetModel getByUserId(Long id){
+        BudgetModel existingBudget = budgetRepository.findByUserId(id);
 
+        if(existingBudget == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "BUDGET not found");
+        } else {
+            return existingBudget;
+        }
+    }
     public BudgetModel update(BudgetModel budgetModel){
         return budgetRepository.save(budgetModel);
     }
-
-
-
     public void deleteById(Long id){
         budgetRepository.deleteById(id);
     }
-
-
-
 }
