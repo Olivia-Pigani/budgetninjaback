@@ -1,7 +1,6 @@
 package com.budgetninja.back.service;
 
 import com.budgetninja.back.model.UserModel;
-import com.budgetninja.back.repository.RoleRepository;
 import com.budgetninja.back.repository.UserRepository;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
