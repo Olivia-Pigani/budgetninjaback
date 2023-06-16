@@ -27,7 +27,8 @@ public class AlertModel {
     private String target;
 
 
-    @ManyToOne
-    private NinjaModel ninjaModel;
+    @OneToOne
+    @JoinColumn(name="userModel_id")
+    private UserModel user;
 
 }
