@@ -18,6 +18,6 @@ public class CategoryModel {
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long id;
         private String name;
-        @OneToMany(mappedBy = "categorie")
+        @OneToMany(mappedBy = "category")
         private List<TransactionModel> transactions;
 }
