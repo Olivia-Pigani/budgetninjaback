@@ -12,12 +12,10 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@Table(name = "categories")
 public class CategoryModel {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Long id;
-        @Column(name = "categorieName")
-        private String categorieName;
-
-
+        private String name;
 }

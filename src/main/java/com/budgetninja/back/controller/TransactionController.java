@@ -2,6 +2,7 @@ package com.budgetninja.back.controller;
 
 import com.budgetninja.back.model.TransactionModel;
 import com.budgetninja.back.service.TransactionService;
+import jakarta.persistence.Table;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -39,5 +40,5 @@ public class TransactionController {
     @DeleteMapping("/{id}")
     public void deleteTransaction(@PathVariable long id) {
         transactionService.deleteById(id);
-    }
+    }h
 }

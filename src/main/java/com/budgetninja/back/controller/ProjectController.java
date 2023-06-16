@@ -2,6 +2,7 @@ package com.budgetninja.back.controller;
 
 import com.budgetninja.back.model.ProjectModel;
 import com.budgetninja.back.service.ProjectService;
+import jakarta.persistence.Table;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

@@ -3,6 +3,7 @@ package com.budgetninja.back.controller;
 
 import com.budgetninja.back.model.BudgetModel;
 import com.budgetninja.back.service.BudgetService;
+import jakarta.persistence.Table;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
