@@ -29,7 +29,7 @@ public class CategoryService {
             throw new RuntimeException("Category not found");
 
         }else{
-            existingCategory.setCategorieName(categoryModel.getCategorieName());
+            existingCategory.setName(categoryModel.getName());
             return categoryRepository.save(existingCategory);
         }
 
