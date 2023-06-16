@@ -27,15 +27,6 @@ public class NinjaModel {
     private String email;
     private Boolean validated;
 
-    @ManyToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name="user_role",joinColumns = @JoinColumn(name="ninja_id") ,
-            inverseJoinColumns = @JoinColumn(name="role_id"))
-    private List<RoleModel> roles;
-
-//    @ManyToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
-//    @JoinTable(name="category_user",joinColumns = @JoinColumn(name="ninja_id") ,
-//            inverseJoinColumns = @JoinColumn(name="id"))
-//    private List<CategoryModel> categories;
 }
 
 

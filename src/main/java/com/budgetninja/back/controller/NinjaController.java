@@ -8,24 +8,28 @@ import java.util.List;
 
 @RestController
 @CrossOrigin()
-@RequestMapping("/users")
+@RequestMapping("/user")
 public class NinjaController {
     private final NinjaService ninjaService;
 
-    public NinjaController(NinjaService userService){
-        this.ninjaService = userService;
+    public NinjaController(NinjaService ninjaService){
+        this.ninjaService = ninjaService;
     }
     @GetMapping("")
-    public List<NinjaModel> getAllUsers(){
-        return ninjaService.findAllUsers();
+    public List<NinjaModel> getAllNinja(){
+        return ninjaService.findAllNinja();
     }
     @PostMapping("")
-    public NinjaModel createUser(@RequestBody NinjaModel userModel){
-        return ninjaService.save(userModel);
+    public NinjaModel createNinja(@RequestBody NinjaModel ninjaModel){
+        return ninjaService.save(ninjaModel);
 }
     @GetMapping("/{user_id}")
-    public NinjaModel getUserById(@PathVariable Long user_id){
-        return ninjaService.findUserByUserId(user_id);
+    public NinjaModel getNinjaById(@PathVariable Long ninja_id){
+        return ninjaService.findNinjaById(ninja_id);
+    }
+    @DeleteMapping("{ninja_id}")
+    public void deleteNinja(@PathVariable Long ninja_id){
+        ninjaService.deleteNinjaById(ninja_id);
     }
 
 }
