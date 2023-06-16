@@ -13,22 +13,17 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 
-
 public class AlertModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
     private String name;
     private String description;
-    private int periodicite;
+    private int periodicity;
     private int threshold;
     private String target;
-
-
     @OneToOne
-    @JoinColumn(name="userModel_id")
+    @JoinColumn(name="user_id")
     private UserModel user;
-
 }

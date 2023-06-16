@@ -23,12 +23,12 @@ public class BudgetModel {
     private double balance;
     private String name;
     @OneToOne
-    @JoinColumn(name = "userModel_id")
+    @JoinColumn(name = "user_id")
     private UserModel user;
     @OneToOne(mappedBy = "budget", cascade = CascadeType.ALL)
     private SavingModel saving;
     @OneToMany(mappedBy = "budget", cascade = CascadeType.ALL)
+    private TransactionModel transaction;
+    @OneToOne(mappedBy = "budget", cascade = CascadeType.ALL)
     private ProjectModel project;
-    @OneToMany(mappedBy = "budget", cascade = CascadeType.ALL)
-    private List<ProjectModel> projects = new ArrayList<>();
 }

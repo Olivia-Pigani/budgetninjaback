@@ -24,11 +24,10 @@ public class TransactionModel {
     private String type;
 
     @ManyToOne
-    @JoinColumn(name = "budgetModel_id")
+    @JoinColumn(name = "budget_id")
     private BudgetModel budget;
 
     @ManyToOne
-    @JoinColumn(name = "categoryModel_id")
+    @JoinColumn(name = "category_id")
     private CategoryModel category;
-
 }
