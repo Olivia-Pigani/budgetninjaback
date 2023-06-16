@@ -17,25 +17,16 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class NinjaModel {
+public class UserModel {
     @Id
     @GeneratedValue (strategy=GenerationType.IDENTITY)
-    private Long ninja_id;
+    private Long id;
     @Column(unique=true)
     private String username;
     private String password;
+    @Column(unique=true)
     private String email;
-    private Boolean validated;
-
-    @ManyToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name="user_role",joinColumns = @JoinColumn(name="ninja_id") ,
-            inverseJoinColumns = @JoinColumn(name="role_id"))
-    private List<RoleModel> roles;
-
-//    @ManyToMany(cascade=CascadeType.ALL, fetch = FetchType.EAGER)
-//    @JoinTable(name="category_user",joinColumns = @JoinColumn(name="ninja_id") ,
-//            inverseJoinColumns = @JoinColumn(name="id"))
-//    private List<CategoryModel> categories;
+    private Boolean validated = false;
 }
 
 

@@ -1,7 +1,6 @@
 package com.budgetninja.back.controller;
 
 import com.budgetninja.back.model.CategoryModel;
-import com.budgetninja.back.model.NinjaModel;
 import com.budgetninja.back.service.CategoryService;
 import org.springframework.web.bind.annotation.*;
 
