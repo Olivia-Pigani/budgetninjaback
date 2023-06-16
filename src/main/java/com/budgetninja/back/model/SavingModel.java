@@ -17,7 +17,7 @@ public class SavingModel {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private double amount;
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "budget_id")
     private BudgetModel budget;
 }

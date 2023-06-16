@@ -21,7 +21,6 @@ public class BudgetModel {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private double balance;
-    private String name;
     @OneToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private UserModel user;
