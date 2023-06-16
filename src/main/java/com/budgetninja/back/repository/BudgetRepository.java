@@ -1,4 +1,9 @@
 package com.budgetninja.back.repository;
 
-public interface BudgetRepository {
+import com.budgetninja.back.model.BudgetModel;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface BudgetRepository extends JpaRepository<BudgetModel, Long> {
 }
