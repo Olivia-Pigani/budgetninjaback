@@ -28,7 +28,7 @@ public class BudgetModel {
     @OneToOne(mappedBy = "budget", cascade = CascadeType.ALL)
     private SavingModel saving;
     @OneToMany(mappedBy = "budget", cascade = CascadeType.ALL)
-    private TransactionModel transaction;
+    private List<TransactionModel> transactions = new ArrayList<>();
     @OneToOne(mappedBy = "budget", cascade = CascadeType.ALL)
     private ProjectModel project;
 }
