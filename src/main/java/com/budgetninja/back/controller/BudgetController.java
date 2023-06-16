@@ -31,9 +31,9 @@ public class BudgetController {
         return budgetService.addBudgetToUser(userId, budgetModel);
     }
 
-    @PutMapping("")
-    public BudgetModel update(@RequestBody BudgetModel budgetModel){
-        return budgetService.update(budgetModel);
+    @PutMapping("/{id}")
+    public BudgetModel update(@RequestBody BudgetModel budgetModel, @PathVariable Long id){
+        return budgetService.update(budgetModel, id);
     }
 
     @DeleteMapping("/{id}")

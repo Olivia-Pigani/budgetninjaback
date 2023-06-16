@@ -12,8 +12,6 @@ import java.util.List;
 
 @Service
 public class BudgetService {
-
-
 private final BudgetRepository budgetRepository;
 private final UserRepository userRepository;
     public BudgetService(BudgetRepository budgetRepository, UserRepository userRepository) {
@@ -28,13 +26,11 @@ private final UserRepository userRepository;
                 () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "BUDGET not found")
         );
     }
-
     public BudgetModel addBudgetToUser(Long userId, BudgetModel budget) {
         UserModel user = userRepository.findById(userId).orElseThrow(() -> new IllegalArgumentException("User not found"));
         budget.setUser(user);
         return budgetRepository.save(budget);
     }
-
     public BudgetModel getByUserId(Long id){
         BudgetModel existingBudget = budgetRepository.findByUserId(id);
 
@@ -44,8 +40,13 @@ private final UserRepository userRepository;
             return existingBudget;
         }
     }
-    public BudgetModel update(BudgetModel budgetModel){
-        return budgetRepository.save(budgetModel);
+    public BudgetModel update(BudgetModel budgetModel, long id){
+        BudgetModel existingBudget = budgetRepository.findById(id).orElseThrow(
+                () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "BUDGET not found")
+        );
+        existingBudget.setBalance(budgetModel.getBalance());
+        existingBudget.setName(budgetModel.getName());
+        return budgetRepository.save(existingBudget);
     }
     public void deleteById(Long id){
         budgetRepository.deleteById(id);
