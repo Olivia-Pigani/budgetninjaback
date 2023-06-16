@@ -24,6 +24,9 @@ public class UserModel {
     @OneToOne(mappedBy="user", cascade = CascadeType.ALL)
     private AlertModel alert;
 
+    @OneToOne(mappedBy="user", cascade = CascadeType.ALL)
+    private BudgetModel budget;
+
 }
 
 

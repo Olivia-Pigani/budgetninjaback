@@ -11,16 +11,10 @@ import java.util.List;
 @CrossOrigin
 @RequestMapping("/budget")
 public class BudgetController {
-
     private final BudgetService budgetService;
-
     public BudgetController(BudgetService budgetService) {
         this.budgetService = budgetService;
     }
-
-
-
-
     @GetMapping("")
     public List<BudgetModel> findAll(){
         return budgetService.findAll();
