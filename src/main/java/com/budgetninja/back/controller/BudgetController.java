@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/budget")
+@RequestMapping("/budgets")
 public class BudgetController {
     private final BudgetService budgetService;
     public BudgetController(BudgetService budgetService) {
@@ -26,9 +26,9 @@ public class BudgetController {
         return budgetService.findById(id);
     }
 
-    @PostMapping("")
-    public BudgetModel save(@RequestBody BudgetModel budgetModel){
-        return budgetService.update(budgetModel);
+    @PostMapping("/{userId}")
+    public BudgetModel addBudgetToUser(@RequestBody BudgetModel budgetModel, @PathVariable Long userId){
+        return budgetService.addBudgetToUser(userId, budgetModel);
     }
 
     @PutMapping("")

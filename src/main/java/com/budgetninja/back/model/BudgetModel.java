@@ -23,7 +23,7 @@ public class BudgetModel {
     private double balance;
     private String name;
     @OneToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", referencedColumnName = "id")
     private UserModel user;
     @OneToOne(mappedBy = "budget", cascade = CascadeType.ALL)
     private SavingModel saving;

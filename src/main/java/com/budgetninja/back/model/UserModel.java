@@ -1,6 +1,7 @@
 package com.budgetninja.back.model;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.AllArgsConstructor;
@@ -25,6 +26,7 @@ public class UserModel {
     private AlertModel alert;
 
     @OneToOne(mappedBy="user", cascade = CascadeType.ALL)
+    @JsonBackReference
     private BudgetModel budget;
 
 }
