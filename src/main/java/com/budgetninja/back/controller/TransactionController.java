@@ -3,6 +3,7 @@ package com.budgetninja.back.controller;
 import com.budgetninja.back.model.TransactionModel;
 import com.budgetninja.back.service.TransactionService;
 import jakarta.persistence.Table;
+import jakarta.transaction.Transactional;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,7 +38,6 @@ public class TransactionController {
     public TransactionModel updateTransaction(@RequestBody TransactionModel transaction, @PathVariable long id) {
         return transactionService.update(transaction, id);
     }
-
     @DeleteMapping("/{id}")
     public void deleteTransaction(@PathVariable long id) {
         transactionService.deleteById(id);

@@ -5,6 +5,8 @@ import com.budgetninja.back.model.TransactionModel;
 import com.budgetninja.back.model.UserModel;
 import com.budgetninja.back.repository.TransactionRepository;
 import com.budgetninja.back.repository.UserRepository;
+import jakarta.transaction.Transactional;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -33,7 +35,7 @@ public class TransactionService {
     }
 
     public ResponseEntity<TransactionModel> addTransactionToUser(Long userId, TransactionModel transaction) {
-        if (transaction == null || transaction.getAmount() <= 0 || transaction.getDate() == null ||  transaction.getType() == null) {
+        if (transaction == null || transaction.getAmount() <= 0 || transaction.getDate() == null || transaction.getType() == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Données de la transaction invalides");
         }
 
@@ -63,6 +65,13 @@ public class TransactionService {
     }
 
     public void deleteById(long id) {
-        transactionRepository.deleteById(id);
+        TransactionModel transaction = transactionRepository.findById(id)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Transaction not found"));
+
+        try {
+            transactionRepository.delete(transaction);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Failed to delete transaction");
+        }
     }
 }
