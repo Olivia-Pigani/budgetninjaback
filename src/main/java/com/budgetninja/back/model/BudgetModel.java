@@ -33,5 +33,6 @@ public class BudgetModel {
     @JsonManagedReference
     private List<TransactionModel> transactions = new ArrayList<>();
     @OneToOne(mappedBy = "budget", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private ProjectModel project;
 }

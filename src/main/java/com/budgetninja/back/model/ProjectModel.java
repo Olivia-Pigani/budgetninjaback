@@ -1,5 +1,6 @@
 package com.budgetninja.back.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,5 +21,6 @@ public class ProjectModel {
     private double goal;
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "budget_id")
+    @JsonBackReference
     private BudgetModel budget;
 }
