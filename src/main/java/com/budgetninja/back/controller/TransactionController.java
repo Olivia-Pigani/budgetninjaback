@@ -3,6 +3,7 @@ package com.budgetninja.back.controller;
 import com.budgetninja.back.model.TransactionModel;
 import com.budgetninja.back.service.TransactionService;
 import jakarta.persistence.Table;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,19 +18,19 @@ public class TransactionController {
         this.transactionService = transactionService;
     }
 
-    @GetMapping("")
-    public List<TransactionModel> getAllTransactions() {
-        return transactionService.findAll();
+    @GetMapping("/user/{userId}")
+    public List<TransactionModel> getAllTransactionsByUserId(@PathVariable long userId) {
+        return transactionService.getAllTransactionsByUserId(userId);
     }
 
     @GetMapping("/{id}")
-    public TransactionModel getTransactionById(long id) {
+    public TransactionModel getTransactionById(@PathVariable long id) {
         return transactionService.findById(id);
     }
 
-    @PostMapping("")
-    public TransactionModel createTransaction(@RequestBody TransactionModel transaction) {
-        return transactionService.save(transaction);
+    @PostMapping("/{userId}")
+    public ResponseEntity<TransactionModel> createTransaction(@RequestBody TransactionModel transaction, @PathVariable long userId) {
+        return transactionService.addTransactionToUser(userId, transaction);
     }
 
     @PutMapping("/{id}")
