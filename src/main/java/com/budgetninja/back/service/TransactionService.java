@@ -24,6 +24,10 @@ public class TransactionService {
         this.userRepository = userRepository;
     }
 
+    public List<TransactionModel> getAllTransactions() {
+        return transactionRepository.findAll();
+    }
+
     public List<TransactionModel> getAllTransactionsByUserId(Long userId) {
         return transactionRepository.findAllByBudgetUser_Id(userId);
     }
@@ -58,8 +62,6 @@ public class TransactionService {
             existingTransaction.setDescription(transaction.getDescription());
             existingTransaction.setAmount(transaction.getAmount());
             existingTransaction.setType(transaction.getType());
-            existingTransaction.setBudget(transaction.getBudget());
-            existingTransaction.setCategory(transaction.getCategory());
             return transactionRepository.save(existingTransaction);
         }
     }

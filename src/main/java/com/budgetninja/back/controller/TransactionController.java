@@ -19,6 +19,11 @@ public class TransactionController {
         this.transactionService = transactionService;
     }
 
+    @GetMapping("")
+    public List<TransactionModel> getAllTransactions() {
+        return transactionService.getAllTransactions();
+    }
+
     @GetMapping("/user/{userId}")
     public List<TransactionModel> getAllTransactionsByUserId(@PathVariable long userId) {
         return transactionService.getAllTransactionsByUserId(userId);
