@@ -22,7 +22,7 @@ public class BudgetModel {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private double balance;
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private UserModel user;
     @OneToOne(mappedBy = "budget", cascade = CascadeType.ALL)

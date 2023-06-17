@@ -23,7 +23,7 @@ public class AlertModel {
     private int periodicity;
     private int threshold;
     private String target;
-    @OneToOne
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name="user_id")
     private UserModel user;
 }

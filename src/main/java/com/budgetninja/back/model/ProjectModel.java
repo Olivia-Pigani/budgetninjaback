@@ -18,7 +18,7 @@ public class ProjectModel {
     private long id;
     private String name;
     private double goal;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "budget_id")
     private BudgetModel budget;
 }
