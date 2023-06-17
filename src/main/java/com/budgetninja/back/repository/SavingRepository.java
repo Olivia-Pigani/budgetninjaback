@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SavingRepository extends JpaRepository<SavingModel, Long> {
+    SavingModel findByBudgetUser_Id(Long userId);
 }

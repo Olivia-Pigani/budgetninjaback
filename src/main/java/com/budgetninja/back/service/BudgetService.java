@@ -39,12 +39,18 @@ public class BudgetService {
         UserModel user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Utilisateur non trouvé"));
 
+        // Vérifier si un budget est déjà associé à l'utilisateur
+        if (user.getBudget() != null) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Un budget est déjà associé à cet utilisateur");
+        }
+
         budget.setUser(user);
         BudgetModel savedBudget = budgetRepository.save(budget);
 
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(savedBudget);
     }
+
 
     public BudgetModel findByUserId(Long userId) {
         return budgetRepository.findByUser_Id(userId)

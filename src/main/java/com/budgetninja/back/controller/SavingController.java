@@ -3,7 +3,10 @@ package com.budgetninja.back.controller;
 import com.budgetninja.back.model.SavingModel;
 import com.budgetninja.back.service.SavingService;
 import jakarta.persistence.Table;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 
@@ -27,9 +30,19 @@ public class SavingController {
         return savingService.findById(id);
     }
 
-    @PostMapping("")
-    public SavingModel save(@RequestBody SavingModel savingModel) {
-        return savingService.save(savingModel);
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<SavingModel> getSavingByUserId(@PathVariable Long userId) {
+        SavingModel saving = savingService.findByUser(userId);
+        if (saving == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Epargne non trouvée");
+        }
+        return ResponseEntity.ok(saving);
+    }
+
+    @PostMapping("/{userId}")
+    public SavingModel save(@PathVariable long userId,  @RequestBody SavingModel savingModel) {
+
+        return savingService.addSavingToUser(userId, savingModel);
     }
 
     @PutMapping("{id}")
@@ -37,8 +50,8 @@ public class SavingController {
         return savingService.update(savingModel, id);
     }
 
-    @DeleteMapping("{id}")
-    public void delete(@PathVariable Long id) {
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable long id) {
         savingService.delete(id);
     }
 }
