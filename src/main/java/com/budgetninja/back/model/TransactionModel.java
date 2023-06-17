@@ -23,7 +23,7 @@ public class TransactionModel {
     private double amount;
     private String type;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "budget_id")
     private BudgetModel budget;
 
