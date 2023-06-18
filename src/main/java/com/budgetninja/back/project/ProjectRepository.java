@@ -6,5 +6,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ProjectRepository extends JpaRepository<Project, Long> {
-    Project findByBudgetUser_Id(Long userId);
+    Project findBySavingBudgetUser_Id(Long userId);
+
+    void deleteAllBySavingBudget_Id(Long id);
+
 }

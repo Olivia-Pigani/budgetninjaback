@@ -1,9 +1,13 @@
 package com.budgetninja.back.budget;
 
 import com.budgetninja.back.budget.Budget;
+import com.budgetninja.back.project.ProjectRepository;
+import com.budgetninja.back.saving.SavingRepository;
+import com.budgetninja.back.transaction.TransactionRepository;
 import com.budgetninja.back.user.User;
 import com.budgetninja.back.budget.BudgetRepository;
 import com.budgetninja.back.user.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -15,10 +19,16 @@ import java.util.List;
 public class BudgetService {
     private final BudgetRepository budgetRepository;
     private final UserRepository userRepository;
+    private final TransactionRepository transactionRepository;
+    private final SavingRepository savingRepository;
+    private final ProjectRepository projectRepository;
 
-    public BudgetService(BudgetRepository budgetRepository, UserRepository userRepository) {
+    public BudgetService(BudgetRepository budgetRepository, UserRepository userRepository, TransactionRepository transactionRepository, SavingRepository savingRepository, ProjectRepository projectRepository) {
         this.budgetRepository = budgetRepository;
         this.userRepository = userRepository;
+        this.transactionRepository = transactionRepository;
+        this.savingRepository = savingRepository;
+        this.projectRepository = projectRepository;
     }
 
     public List<Budget> findAll() {
@@ -63,10 +73,13 @@ public class BudgetService {
         return budgetRepository.save(existingBudget);
     }
 
-    public ResponseEntity<Budget> deleteById(Long id) {
+    @Transactional
+    public void deleteById(Long id) {
         Budget budget = budgetRepository.findById(id)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Budget non trouvé"));
+        transactionRepository.deleteAllByBudget_Id(id);
+        savingRepository.deleteAllByBudget_Id(id);
+        projectRepository.deleteAllBySavingBudget_Id(id);
         budgetRepository.delete(budget);
-        return ResponseEntity.ok(budget);
     }
 }

@@ -36,7 +36,4 @@ public class Budget {
     @OneToMany(mappedBy = "budget", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JsonManagedReference
     private List<Transaction> transactions = new ArrayList<>();
-    @OneToOne(mappedBy = "budget", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JsonManagedReference
-    private Project project;
 }

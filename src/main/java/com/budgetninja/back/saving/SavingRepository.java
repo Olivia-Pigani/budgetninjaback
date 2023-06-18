@@ -7,4 +7,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface SavingRepository extends JpaRepository<Saving, Long> {
     Saving findByBudgetUser_Id(Long userId);
+
+    void deleteAllByBudget_Id(Long id);
 }

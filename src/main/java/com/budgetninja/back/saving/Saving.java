@@ -1,7 +1,9 @@
 package com.budgetninja.back.saving;
 
 import com.budgetninja.back.budget.Budget;
+import com.budgetninja.back.project.Project;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,4 +27,7 @@ public class Saving {
     @JoinColumn(name = "budget_id")
     @JsonBackReference
     private Budget budget;
+    @OneToOne(mappedBy = "saving", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @JsonManagedReference
+    private Project project;
 }

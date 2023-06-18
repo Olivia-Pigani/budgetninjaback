@@ -42,7 +42,7 @@ public class BudgetController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Budget> delete(@PathVariable Long id) {
-        return budgetService.deleteById(id);
+    public void delete(@PathVariable Long id) {
+        budgetService.deleteById(id);
     }
 }

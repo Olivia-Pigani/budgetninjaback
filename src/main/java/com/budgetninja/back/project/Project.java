@@ -1,6 +1,7 @@
 package com.budgetninja.back.project;
 
 import com.budgetninja.back.budget.Budget;
+import com.budgetninja.back.saving.Saving;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -21,7 +22,7 @@ public class Project {
     private String name;
     private double goal;
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-    @JoinColumn(name = "budget_id")
+    @JoinColumn(name = "project_id")
     @JsonBackReference
-    private Budget budget;
+    private Saving saving;
 }

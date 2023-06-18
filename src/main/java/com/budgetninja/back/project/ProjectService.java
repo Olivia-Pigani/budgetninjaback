@@ -1,8 +1,6 @@
 package com.budgetninja.back.project;
 
 import com.budgetninja.back.budget.Budget;
-import com.budgetninja.back.project.Project;
-import com.budgetninja.back.project.ProjectRepository;
 import com.budgetninja.back.user.UserRepository;
 import com.budgetninja.back.user.User;
 import org.springframework.http.HttpStatus;
@@ -31,7 +29,7 @@ public class ProjectService {
     }
 
     public Project findByUserId(Long userId) {
-        return projectRepository.findByBudgetUser_Id(userId);
+        return projectRepository.findBySavingBudgetUser_Id(userId);
     }
 
     public ResponseEntity<Project> addProjectToUser(long userId, Project project) {
@@ -42,7 +40,7 @@ public class ProjectService {
         User user = userRepository.findById(userId)
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Utilisateur non trouvé"));
 
-        project.setBudget(user.getBudget());
+        project.setSaving(user.getBudget().getSaving());
         Project savedProject = projectRepository.save(project);
 
         return ResponseEntity.status(HttpStatus.CREATED)
@@ -65,13 +63,13 @@ public class ProjectService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Utilisateur non trouvé"));
 
         Budget budget = user.getBudget();
-        Project project = budget.getProject();
+        Project project = budget.getSaving().getProject();
 
         if (project == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Projet non trouvé pour cet utilisateur");
         }
 
-        budget.setProject(null);
+        budget.getSaving().setProject(null);
 
         try {
             projectRepository.delete(project);
