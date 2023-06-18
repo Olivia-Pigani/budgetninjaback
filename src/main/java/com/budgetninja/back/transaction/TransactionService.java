@@ -1,5 +1,7 @@
 package com.budgetninja.back.transaction;
 
+import com.budgetninja.back.category.Category;
+import com.budgetninja.back.category.CategoryRepository;
 import com.budgetninja.back.transaction.Transaction;
 import com.budgetninja.back.user.User;
 import com.budgetninja.back.transaction.TransactionRepository;
@@ -15,10 +17,12 @@ import java.util.List;
 public class TransactionService {
     private final TransactionRepository transactionRepository;
     private final UserRepository userRepository;
+    private final CategoryRepository categoryRepository;
 
-    public TransactionService(TransactionRepository transactionRepository, UserRepository userRepository) {
+    public TransactionService(TransactionRepository transactionRepository, UserRepository userRepository, CategoryRepository categoryRepository) {
         this.transactionRepository = transactionRepository;
         this.userRepository = userRepository;
+        this.categoryRepository = categoryRepository;
     }
 
     public List<Transaction> getAllTransactions() {
@@ -45,6 +49,22 @@ public class TransactionService {
 
         transaction.setBudget(user.getBudget());
         Transaction savedTransaction = transactionRepository.save(transaction);
+
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(savedTransaction);
+    }
+
+    public ResponseEntity<Transaction> addCategoryToTransaction(long categoryId, long transactionId) {
+
+
+        Transaction existingTransaction = transactionRepository.findById(transactionId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Transaction non trouvée"));
+
+        Category category = categoryRepository.findById(categoryId)
+                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Categorie non trouvée"));
+
+        existingTransaction.setCategory(category);
+        Transaction savedTransaction = transactionRepository.save(existingTransaction);
 
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(savedTransaction);

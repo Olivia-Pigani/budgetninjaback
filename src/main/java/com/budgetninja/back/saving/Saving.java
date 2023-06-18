@@ -19,6 +19,8 @@ public class Saving {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private double amount = 0;
+    private double programmedAmount = 0;
+    private long programmedFrequency = 0;
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "budget_id")
     @JsonBackReference

@@ -59,10 +59,22 @@ public class CategoryService {
             existingCategory.setName(category.getName());
             return categoryRepository.save(existingCategory);
         }
-
     }
     public void deleteCategoryById(Long category_id){
-        categoryRepository.deleteById(category_id);
+        Category category = categoryRepository.findById(category_id).orElseThrow(
+                ()->new ResponseStatusException(HttpStatus.NOT_FOUND,"categorie non trouvée")
+        );
+
+        try {
+            List<Transaction> transactions = transactionRepository.findAllByCategory(category);
+            for (Transaction transaction : transactions) {
+                transaction.setCategory(null);
+                transactionRepository.save(transaction);
+            }
+            categoryRepository.delete(category);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "La catégorie est utilisée par une transaction");
+        }
     }
     public Category save(Category category){
         return categoryRepository.save(category);

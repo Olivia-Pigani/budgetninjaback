@@ -35,10 +35,16 @@ public class TransactionController {
         return transactionService.addTransactionToUser(userId, transaction);
     }
 
+    @PutMapping("/{transactionId}/category/{categoryId}")
+    public ResponseEntity<Transaction> addCategoryToTransaction(@PathVariable long transactionId, @PathVariable long categoryId) {
+        return transactionService.addCategoryToTransaction(categoryId, transactionId);
+    }
+
     @PutMapping("/{id}")
     public Transaction updateTransaction(@RequestBody Transaction transaction, @PathVariable long id) {
         return transactionService.update(transaction, id);
     }
+
     @DeleteMapping("/{id}")
     public void deleteTransaction(@PathVariable long id) {
 

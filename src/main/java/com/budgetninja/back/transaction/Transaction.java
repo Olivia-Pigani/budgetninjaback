@@ -3,6 +3,7 @@ package com.budgetninja.back.transaction;
 import com.budgetninja.back.budget.Budget;
 import com.budgetninja.back.category.Category;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -31,7 +32,7 @@ public class Transaction {
     @JsonBackReference
     private Budget budget;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE}, fetch = FetchType.EAGER)
     @JoinColumn(name = "category_id")
     private Category category;
 }
