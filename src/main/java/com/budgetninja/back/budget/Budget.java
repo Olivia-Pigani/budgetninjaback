@@ -30,13 +30,13 @@ public class Budget {
     @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     private User user;
-    @OneToOne(mappedBy = "budget", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "budget", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JsonBackReference
     private Saving saving;
-    @OneToMany(mappedBy = "budget", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "budget", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JsonManagedReference
     private List<Transaction> transactions = new ArrayList<>();
-    @OneToOne(mappedBy = "budget", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "budget", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JsonManagedReference
     private Project project;
 }

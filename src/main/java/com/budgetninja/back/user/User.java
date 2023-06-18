@@ -2,9 +2,13 @@ package com.budgetninja.back.user;
 
 import com.budgetninja.back.alert.Alert;
 import com.budgetninja.back.budget.Budget;
+import com.budgetninja.back.category.Category;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 @Entity
 @Getter
@@ -23,13 +27,17 @@ public class User {
     private String email;
     private Boolean validated = false;
 
-
     @OneToOne(mappedBy="user", cascade = CascadeType.ALL)
     private Alert alert;
 
     @OneToOne(mappedBy="user", cascade = CascadeType.ALL)
     @JsonBackReference
     private Budget budget;
+
+    @OneToMany(mappedBy = "user")
+    @JsonManagedReference
+    private List<Category> categories;
+
 
 }
 
