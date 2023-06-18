@@ -7,12 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 
 public interface AlertRepository extends JpaRepository<Alert, Long> {
-
-
-
-
-
-
-
-
+    Alert findByUserId(Long userId);
 }

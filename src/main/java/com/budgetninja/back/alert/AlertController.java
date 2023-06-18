@@ -17,9 +17,6 @@ public class AlertController {
         this.alertService = alertService;
     }
 
-
-
-
     @GetMapping("")
     public List<Alert> findAll(){
         return alertService.findAll();
@@ -30,27 +27,22 @@ public class AlertController {
         return alertService.findById(id);
     }
 
-    @PostMapping("")
-    public Alert save(@RequestBody Alert ingrediant){
-        return alertService.update(ingrediant);
+    @GetMapping("/user/{userId}")
+    public Alert findByUserId(@PathVariable Long userId){
+        return alertService.findByUserId(userId);
     }
 
-    @PutMapping("")
-    public Alert update(@RequestBody Alert ingrediant){
-        return alertService.update(ingrediant);
+    @PostMapping("/{userId}")
+    public Alert addAlert(@RequestBody Alert alert, @PathVariable long userId){
+        return alertService.addAlertToUser(userId, alert);
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+    @PutMapping("/{id}")
+    public Alert update(@RequestBody Alert alert, @PathVariable long id){
+        return alertService.update(id, alert);
+    }
+    @DeleteMapping("{id}")
+    public void deleteById(@PathVariable Long id){
+        alertService.deleteById(id);
+    }
 }

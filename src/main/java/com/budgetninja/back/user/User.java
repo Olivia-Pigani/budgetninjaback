@@ -28,6 +28,7 @@ public class User {
     private Boolean validated = false;
 
     @OneToOne(mappedBy="user", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private Alert alert;
 
     @OneToOne(mappedBy="user", cascade = CascadeType.ALL)
