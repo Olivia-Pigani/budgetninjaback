@@ -43,8 +43,8 @@ public class SavingController {
     }
 
     @PostMapping("programmed/{savingId}")
-    public Saving addProgrammedSaving(@PathVariable long savingId, @RequestBody int programmedSavingAmount) {
-        return savingService.addProgrammedSaving(savingId, programmedSavingAmount);
+    public Saving addProgrammedSaving(@PathVariable long savingId, @RequestBody Saving saving) {
+        return savingService.addProgrammedSaving(savingId, saving);
     }
 
     @PutMapping("/{id}")
