@@ -22,7 +22,7 @@ public class ProjectController {
     }
 
     @GetMapping("/{id}")
-    public Project findById(Long id) {
+    public Project findById(@PathVariable Long id) {
         return projectService.findById(id);
     }
 
