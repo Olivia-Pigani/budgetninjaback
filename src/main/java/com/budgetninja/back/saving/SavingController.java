@@ -47,6 +47,11 @@ public class SavingController {
         return savingService.addProgrammedSaving(savingId, saving);
     }
 
+    @PostMapping("programmedFrequency/{savingId}")
+    public Saving addProgrammedSavingFrequency(@PathVariable long savingId, @RequestBody Saving saving) {
+        return savingService.addProgrammedSavingFrequency(savingId, saving);
+    }
+
     @PutMapping("/{id}")
     public Saving update(@RequestBody Saving saving, @PathVariable Long id) {
         return savingService.update(saving, id);

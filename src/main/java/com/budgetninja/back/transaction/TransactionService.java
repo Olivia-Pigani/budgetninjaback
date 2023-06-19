@@ -48,6 +48,12 @@ public class TransactionService {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Utilisateur non trouvé"));
 
         transaction.setBudget(user.getBudget());
+        if(transaction.getCategory() != null) {
+            Category category = categoryRepository.findByName(transaction.getCategory().getName()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Categorie non trouvée"));
+            transaction.setCategory(category);
+        } else {
+            transaction.setCategory(null);
+        }
         Transaction savedTransaction = transactionRepository.save(transaction);
 
         return ResponseEntity.status(HttpStatus.CREATED)
@@ -79,6 +85,12 @@ public class TransactionService {
             existingTransaction.setDescription(transaction.getDescription());
             existingTransaction.setAmount(transaction.getAmount());
             existingTransaction.setType(transaction.getType());
+            if(transaction.getCategory() != null){
+                Category category = categoryRepository.findByName(transaction.getCategory().getName()).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Categorie non trouvée"));
+                existingTransaction.setCategory(category);
+            } else {
+                existingTransaction.setCategory(null);
+            }
             return transactionRepository.save(existingTransaction);
         }
     }

@@ -53,6 +53,13 @@ public class SavingService {
         return saving;
     }
 
+    public Saving addProgrammedSavingFrequency(long savingId, Saving saving) {
+        Saving existingSaving = savingRepository.findById(savingId).orElseThrow(() -> new IllegalArgumentException("Épargne introuvable."));
+        saving.setProgrammedFrequency(saving.getProgrammedFrequency());
+        savingRepository.save(saving);
+        return saving;
+    }
+
     public Saving update(Saving saving, long id){
         Saving existingSaving = savingRepository.findById(id).orElse(null);
         if (existingSaving == null) {
