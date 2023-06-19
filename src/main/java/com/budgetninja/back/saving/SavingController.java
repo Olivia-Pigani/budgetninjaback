@@ -22,7 +22,7 @@ public class SavingController {
         return savingService.findAll();
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/{id}")
     public Saving findById(@PathVariable Long id) {
         return savingService.findById(id);
     }
@@ -42,7 +42,12 @@ public class SavingController {
         return savingService.addSavingToUser(userId, saving);
     }
 
-    @PutMapping("{id}")
+    @PostMapping("programmed/{savingId}")
+    public Saving addProgrammedSaving(@PathVariable long savingId, @RequestBody int programmedSavingAmount) {
+        return savingService.addProgrammedSaving(savingId, programmedSavingAmount);
+    }
+
+    @PutMapping("/{id}")
     public Saving update(@RequestBody Saving saving, @PathVariable Long id) {
         return savingService.update(saving, id);
     }

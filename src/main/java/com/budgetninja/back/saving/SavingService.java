@@ -46,6 +46,13 @@ public class SavingService {
         return saving;
     }
 
+    public Saving addProgrammedSaving (long savingId, long programmedSavingAmount) {
+        Saving saving = savingRepository.findById(savingId).orElseThrow(() -> new IllegalArgumentException("Épargne introuvable."));
+        saving.setProgrammedAmount(programmedSavingAmount);
+        savingRepository.save(saving);
+        return saving;
+    }
+
     public Saving update(Saving saving, long id){
         Saving existingSaving = savingRepository.findById(id).orElse(null);
         if (existingSaving == null) {
